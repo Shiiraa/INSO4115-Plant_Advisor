@@ -1,0 +1,450 @@
+/* 
+author: Alanis Nazario
+Date: March 2022
+TO-DO LIST:
+Fix code to fit project aesthetics
+
+*/
+
+
+body{
+    background-color: #ffffff;
+    margin: 0%;
+    font-family: sans-serif;
+}
+
+hr {
+    border       : solid #e0e0e0;
+    border-width : 1px 0 0;
+    clear        : both;
+    margin       : 2.4rem 0 1.6rem;
+    height       : 0;
+}
+
+nav .dark-logo-img{
+    display: none !important;
+}
+
+nav .light-logo-img{
+    display: block;
+}
+
+nav{
+    overflow: hidden;
+    position: sticky;
+    position: -webkit-sticky;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(141,159,134,0);
+    background: linear-gradient(to bottom, #8D9F86, #8D9F86  70%, #8D9F86  );
+    
+    
+}
+
+nav a{
+    line-height: 370%;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+    font-size: 16px;
+}
+
+nav.scrolled {
+    background: linear-gradient(to bottom, #8D9F86, #8D9F86  70%, #8D9F86  );
+    transition: background .5s;
+    background: #8D9F86 !important;
+}
+
+nav.scrolled .dark-logo-img{
+    display: block !important;
+}
+
+nav.scrolled .light-logo-img{
+    display: none;
+}
+
+.navtext:hover{
+    text-decoration: underline;
+}
+
+nav .icon {
+    display: none;
+}
+    
+/* Unsure if it's working */
+@media screen and (max-width: 600px) {
+    nav a:not(:first-child) {display: none;}
+    nav a.icon {
+      float: right;
+      display: block;
+    }
+    .premium-img a.premium-img{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    nav.responsive {position: relative;}
+    nav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+}
+
+nav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+   }
+}
+
+.logo-img img{
+    top: 2%;
+    left: 2%;
+    position: relative;
+    width: 65px;
+    display: inline-block;
+}
+
+.premium-button {
+    background-color: #ADC3A3;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px; 
+    transition: 0.5s;
+
+}
+
+.premium-button:hover{
+    background-color: #5C6957;
+    color: white;
+}
+
+.download-nav{
+    transition: 0.5s;
+}
+
+.download-nav:hover{
+    color: black;
+}
+
+.home-page img{
+    max-width: 100%;
+    height: auto;
+    display: grid;
+    margin: 0;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Footer */
+
+footer{
+    clear: both;
+    bottom: 0%;
+    color: white;
+    line-height: 1.5;
+    margin: 0%;
+    height: auto;
+    width: 99%;
+    padding: 10px;
+    background: #8D9F86;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    padding: 14px 16px;
+
+}
+
+
+.home-footer div{
+    width: 100px; 
+    height:100px; 
+    background:gray; 
+    margin:10px
+}
+
+.home-footer-1{
+    float: right;
+    
+}
+
+.home-footer-2{
+    float:left;
+    padding-left: 10px;
+}
+
+.home-footer-3{
+    float: left;
+    padding-left: 20px;
+}
+
+.home-footer-4{
+    float: left;
+    padding-left: 20px;
+}
+
+.home-footer-5{
+    float: left;
+    padding-left: 20px;
+}
+
+.home-footer-6{
+    float: left;
+    padding-left: 20px;
+}
+
+.general-container{
+    position: relative;
+}
+
+.general-container img{
+    max-width: 100%;
+    height: auto;
+    display: grid;
+    margin: 0;
+}
+
+
+/* CSS Code from here onwards is still in review. */
+
+/* Premium page */
+
+.premium-container{
+    position: relative;
+}
+
+.premium-container img{
+    max-width: 100%;
+    height: auto;
+    display: grid;
+    margin: 0;
+    opacity: 80%;
+}
+
+.buttons-premium-background{
+    position: absolute;
+    top: 300px;
+    left: 50px;
+}
+.buttons-premium-background img{
+    position: absolute;
+    top: -200px;
+    width: 250px;
+    height: auto;
+}
+
+.premium-title{
+    font-family: sans-serif;
+    font-size: 24px;
+    color: #f9eeff;
+}
+
+.premium-description{
+    font-family: sans-serif;
+    font-size: 18px;
+    color: #f9eeff;
+    margin: 0;
+}
+.year-price{
+    width: 230px;
+    height: 40px;
+    margin: 40px;
+    border: none;
+    border-radius: 25px;
+    color:#f9eeff;
+    background-color: #7f7884;
+    font-size: 18px;
+    text-align: center;
+}
+#savings{
+    font-size: 10px;
+    color: #d1abe6;
+}
+
+.month-price{
+    width: 230px;
+    height: 40px;
+    margin: auto;
+    border: none;
+    border-radius: 25px;
+    color: #f9eeff;
+    background-color: #7f7884;
+    font-size: 18px;
+    text-align: center;
+}
+
+.premium-perks{
+    position: relative;
+    left: 50px;
+    
+}
+
+.perk-title{
+    left: 40px;
+    font-family: sans-serif;
+    font-size: 24px;
+    color: #f9eeff;
+}
+
+.premium-perks-2{
+    position: relative;
+    left: 50px;
+    clear: both;
+}
+
+.perk{
+    font-size: 16px;
+    text-align: center;
+    float: left;
+    margin: 20px;
+    height: 200px;
+    width: 270px;
+    color: #7f7884;
+    background-color: #f9eeff;
+    margin-left: 20px;
+    margin-right: 5px;
+    border-radius: 25px;
+}
+
+.perk-mtitle{
+    top: 10px;
+}
+
+/* Login page */
+
+.container-1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 100px;
+    margin: 20 0 0 450px;
+    padding: 80px;
+    background: #d1abe6;
+    border-radius: 15px;
+}
+
+.container-2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 780px;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 100px;
+    margin: 20 0 0 450px;
+    padding: 40px;
+    background: #d1abe6;
+    border-radius: 15px;
+}
+
+#gen-label{
+    color: white;
+    font-size: 18px;
+}
+
+#Username{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#Pass{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#log{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    color: #dfc0f0;
+}
+
+#login-span{
+    color: white;
+    font-size: 18px;
+}
+
+#login-a{
+    float: right;
+    color: rgb(139, 134, 143);
+}
+
+/* Status page */
+
+
+/* Support page */
+
+#name{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#email{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#submit{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    color: #dfc0f0;
+}
+
+#message{
+    width: 300px;
+    height: 150px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+/* Support page */
+
+.sup-warning{
+    position: relative;
+    font-size: 16px;
+    color: white;
+    left: 50px;
+}
+
