@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  
+  <h1>Explore</h1>
+  <hr>
+  
+  <div class="container">
+      <div class="text-center">
+        <h3>Most Recent Posts</h3>
+      </div>
+      
+  
+
+    <div class="container justify-content-center">
+        <div class="card p-3">
+            
+            {% for post in posts reversed %}
+                <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                <div class="media-body">
+                    <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                    <p class="article-content">{{ post.content }}</p>
+
+                    <img src="/media/{{ post.image }}" class="img-thumbnail" onerror="this.style.display='none'"/>
+
+                </div>
+                </article>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+    <hr>
+    
+</div>
+  
+
+{% endblock content %}
