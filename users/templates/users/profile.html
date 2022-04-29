@@ -1,0 +1,129 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+            <div class="row">
+              <h2 class="account-heading">{{ user.username }}</h2>
+              {%if user.profile.privacy == "Public"%}
+                <small class="text-white bg-success h-25 d-inline-block">{{user.profile.privacy}}</small>
+              {% else %}
+                <small class="text-white bg-danger h-25 d-inline-block">{{user.profile.privacy}}</small>
+              {% endif %}
+            </div>
+          <p class="text-secondary">{{ user.email }}</p>
+          <p>{{user.profile.bio}}</p>
+        </div>
+      </div>
+      
+      <a class="btn btn-primary" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+      <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">Delete Profile</a>
+    
+    </div>
+
+    <!--Map-->
+    <div class="content-section">
+      <h3>My Visits</h3>
+
+      <div id='map' style='width: 100%; height: 400px;'></div>
+      <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGlvbmZveHByIiwiYSI6ImNrdjV1NWRseTkzb2Yyb2s2NTkyNmswNW4ifQ.UVK1-Mp5uOSx4py0tJqDgg';
+        var map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [ -67.14581792876317, 18.201602792113185], // starting position [lng, lat]
+            zoom: 0 // starting zoom
+        });
+
+      map.addControl(new mapboxgl.FullscreenControl());
+
+      map.on('load', () => {
+          // Insert the layer beneath any symbol layer.
+          const layers = map.getStyle().layers;
+          const labelLayerId = layers.find(
+              (layer) => layer.type === 'symbol' && layer.layout['text-field']
+          ).id;
+
+          // The 'building' layer in the Mapbox Streets
+          // vector tileset contains building height data
+          // from OpenStreetMap.
+          map.addLayer(
+              {
+                  'id': 'add-3d-buildings',
+                  'source': 'composite',
+                  'source-layer': 'building',
+                  'filter': ['==', 'extrude', 'true'],
+                  'type': 'fill-extrusion',
+                  'minzoom': 15,
+                  'paint': {
+                      'fill-extrusion-color': '#aaa',
+
+                      // Use an 'interpolate' expression to
+                      // add a smooth transition effect to
+                      // the buildings as the user zooms in.
+                      'fill-extrusion-height': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          15,
+                          0,
+                          15.05,
+                          ['get', 'height']
+                      ],
+                      'fill-extrusion-base': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          15,
+                          0,
+                          15.05,
+                          ['get', 'min_height']
+                      ],
+                      'fill-extrusion-opacity': 0.6
+                  }
+              },
+              labelLayerId
+          );
+      });
+
+        {% for address in addresses %}                                                      <!--THIS WORKS. DONT WORRY ABOUT THE ERROR THAT ITS GIVING YOU!-->
+            {% if address.author == request.user %}
+                var marker = new mapboxgl.Marker()                                                  
+                    .setLngLat([{{ address.long }}, {{ address.lat }}])                             
+                    .setPopup(new mapboxgl.Popup().setHTML("<p>{{ address.address }}</p>"))         
+                    .addTo(map);
+            {% endif %}                                                                 
+        {% endfor %}
+    
+      </script>
+      <div class="col text-center">
+        <a class="btn btn-primary" href="{% url 'blog-address' %}" role="button">Add A New Marker</a>
+      </div>
+      
+    </div>
+
+    <!--User Posts-->
+    <div class="content-section">
+      <h3>My Posts</h3>
+      {% for post in posts reversed %}
+        {% if post.author == request.user %}
+          <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          <div class="media-body">
+              <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+              </div>
+              <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+              <p class="article-content">{{ post.content }}</p>
+          </div>
+          </article>
+          {% endif %}
+      {% endfor %}
+
+    </div>
+
+    
+{% endblock content %}

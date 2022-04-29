@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<!--From class Profile in .models-->
+{% if searched %}
+
+    <div class="container justify-content-center">
+        <div class="card p-3">
+            <h3>You searched for: {{ searched }}</h3>
+               
+            {% for venue in venues %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ venue.image.url }}">
+                <div class="media-body">
+                    <div class="article-metadata">
+                    {%if venue.privacy == "Public"%}
+                        <a class="mr-2">This account is</a>
+                        <small class="text-white bg-success">{{venue.privacy}}</small>
+                    {% else %}
+                        <a class="mr-2" >This account is</a>
+                        <small class="text-white bg-danger">{{venue.privacy}}</small>
+                    {% endif %}
+                    </div>
+                    <h2><a class="article-title" href="#" >{{venue.user}}</a></h2>
+                    <p class="article-content">{{venue.bio}}</p>
+                </div>
+                </article>
+
+            {% endfor %}
+        </div>
+    </div>  
+    
+
+{% else %}
+    <div class="container justify-content-center">
+        <div class="card p-3 text-center">
+            <p>You forgot to enter a username...</p>
+        </div>
+    </div> 
+{% endif %}
+
+
+
+{% endblock content %}
